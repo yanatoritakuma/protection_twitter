@@ -27,8 +27,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data = await (() => {
     return new Promise((resolve) => {
-      console.log("q", q);
-      client.get("search/tweets", { q, count: 100 }, function (_error, tweets) {
+      client.get("search/tweets", { q, count: 2 }, function (_error, tweets) {
+        console.log("tweets!!!", tweets);
         resolve(tweets);
       });
     });

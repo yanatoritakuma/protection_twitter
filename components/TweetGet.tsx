@@ -9,12 +9,12 @@ export const TweetGet = () => {
       return;
     }
 
-    const q = "ドラマ";
+    const q = "保護犬猫";
+
     const request = async () => {
       const res = await fetch(`/api/tweets?q=${encodeURIComponent(q)}`);
       const data = await res.json();
 
-      console.log("data", data);
       setTweets(data);
     };
     request();
