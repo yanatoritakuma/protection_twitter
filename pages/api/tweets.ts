@@ -27,28 +27,39 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const data = await (() => {
     return new Promise((resolve) => {
-      client.get("search/tweets", { q, count: 2 }, function (_error, tweets) {
-        console.log("tweets!!!", tweets);
-        resolve(tweets);
-      });
+      client.get(
+        "search/tweets",
+        {
+          q,
+          count: 10,
+          expansions: "attachments.media_keys",
+          "media.fields": "url",
+        },
+        function (_error, tweets) {
+          resolve(tweets);
+        }
+      );
     });
   })();
   const statuses = (
     data as {
       statuses: {
         text: string;
+        entities: string;
       }[];
     }
   ).statuses;
 
   const param: {
     text: string;
+    entities: string;
   }[] = [];
 
   if (statuses) {
     statuses.forEach((tweet) => {
       param.push({
         text: tweet.text,
+        entities: tweet.entities,
       });
     });
   }
