@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         "search/tweets",
         {
           q,
-          count: 10,
+          count: 30,
           expansions: "attachments.media_keys",
           "media.fields": "url",
         },
