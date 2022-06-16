@@ -24,6 +24,11 @@ export const TweetGet = () => {
     request();
   }, []);
 
+  const onClickTweet = (user: string, id: string) => {
+    window.location.href =
+      "https://twitter.com/" + user + "/status/" + id + "/";
+  };
+
   return (
     <section css={sectionBox}>
       {tweets.map((v, i) => (
@@ -39,6 +44,14 @@ export const TweetGet = () => {
           ) : (
             <Image src={noImage} alt="画像なし" width={400} height={340} />
           )}
+
+          <a
+            onClick={() =>
+              onClickTweet(v.entities.user_mentions[0].screen_name, v.id_str)
+            }
+          >
+            Twitterでつぶやく
+          </a>
         </div>
       ))}
     </section>

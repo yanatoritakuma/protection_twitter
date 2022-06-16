@@ -45,6 +45,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     data as {
       statuses: {
         text: string;
+        id_str: string;
         entities: string;
       }[];
     }
@@ -52,6 +53,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const param: {
     text: string;
+    id_str: string;
     entities: string;
   }[] = [];
 
@@ -59,6 +61,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     statuses.forEach((tweet) => {
       param.push({
         text: tweet.text,
+        id_str: tweet.id_str,
         entities: tweet.entities,
       });
     });
