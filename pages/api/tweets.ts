@@ -37,6 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         },
         function (_error, tweets) {
           resolve(tweets);
+          console.log("APIDATA", tweets);
         }
       );
     });

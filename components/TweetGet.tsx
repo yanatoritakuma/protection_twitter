@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 import Image from "next/image";
 import { TTweets } from "../types/typeTweet";
 import noImage from "../public/images/noimage.png";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { Button } from "@mui/material";
 
 export const TweetGet = () => {
   const [tweets, setTweets] = useState<TTweets[]>([]);
@@ -13,12 +15,11 @@ export const TweetGet = () => {
       return;
     }
 
-    const q = "保護犬猫";
+    const q = "webyanatori";
 
     const request = async () => {
       const res = await fetch(`/api/tweets?q=${encodeURIComponent(q)}`);
       const data = await res.json();
-
       setTweets(data);
     };
     request();
@@ -50,7 +51,9 @@ export const TweetGet = () => {
               onClickTweet(v.entities.user_mentions[0].screen_name, v.id_str)
             }
           >
-            Twitterでつぶやく
+            <Button variant="contained">
+              <TwitterIcon />
+            </Button>
           </a>
         </div>
       ))}
@@ -59,10 +62,12 @@ export const TweetGet = () => {
 };
 
 const sectionBox = css`
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  max-width: 1440px;
 `;
 
 const tweetBox = css`
