@@ -34,6 +34,15 @@ export const TweetGet = () => {
     <section css={sectionBox}>
       {tweets.map((v, i) => (
         <div key={i} css={tweetBox}>
+          <div css={profileBox}>
+            <Image
+              src={v.user.profile_image_url}
+              alt="プロフィール画像"
+              width={100}
+              height={100}
+            />
+            <h3>{v.user.name}</h3>
+          </div>
           <p>{v.text}</p>
           {v.entities.media !== undefined ? (
             <Image
@@ -46,11 +55,7 @@ export const TweetGet = () => {
             <Image src={noImage} alt="画像なし" width={400} height={340} />
           )}
 
-          <a
-            onClick={() =>
-              onClickTweet(v.entities.user_mentions[0].screen_name, v.id_str)
-            }
-          >
+          <a onClick={() => onClickTweet(v.user.screen_name, v.id_str)}>
             <Button variant="contained">
               <TwitterIcon />
             </Button>
@@ -73,10 +78,10 @@ const sectionBox = css`
 const tweetBox = css`
   margin: 20px 0;
   padding: 12px;
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   border: 1px solid #657786;
   border-radius: 4px;
   box-shadow: 4px 4px 6px #aaa;
@@ -84,7 +89,7 @@ const tweetBox = css`
   height: 600px;
 
   p {
-    margin: 0;
+    margin: 20px 0;
   }
 
   @media screen and (max-width: 1024px) {
@@ -94,5 +99,20 @@ const tweetBox = css`
   @media screen and (max-width: 768px) {
     width: 96%;
     height: 500px;
+  }
+`;
+
+const profileBox = css`
+  background-color: skyblue;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  img {
+    border-radius: 50%;
+  }
+
+  h3 {
+    margin-left: 12px;
   }
 `;
