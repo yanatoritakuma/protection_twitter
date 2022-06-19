@@ -15,7 +15,7 @@ export const TweetGet = () => {
       return;
     }
 
-    const q = "webyanatori";
+    const q = "保護犬猫 -filter:retweets";
 
     const request = async () => {
       const res = await fetch(`/api/tweets?q=${encodeURIComponent(q)}`);
@@ -35,24 +35,30 @@ export const TweetGet = () => {
       {tweets.map((v, i) => (
         <div key={i} css={tweetBox}>
           <div css={profileBox}>
-            <Image
-              src={v.user.profile_image_url}
-              alt="プロフィール画像"
-              width={100}
-              height={100}
-            />
+            <div css={profileImgBox}>
+              <Image
+                src={v.user.profile_image_url}
+                alt="プロフィール画像"
+                width={100}
+                height={100}
+              />
+            </div>
             <h3>{v.user.name}</h3>
           </div>
           <p>{v.text}</p>
           {v.entities.media !== undefined ? (
-            <Image
-              src={v.entities.media[0].media_url}
-              alt="画像"
-              width={400}
-              height={340}
-            />
+            <div css={imgBox}>
+              <Image
+                src={v.entities.media[0].media_url}
+                alt="画像"
+                width={400}
+                height={340}
+              />
+            </div>
           ) : (
-            <Image src={noImage} alt="画像なし" width={400} height={340} />
+            <div css={imgBox}>
+              <Image src={noImage} alt="画像なし" width={400} height={340} />
+            </div>
           )}
 
           <a onClick={() => onClickTweet(v.user.screen_name, v.id_str)}>
@@ -78,18 +84,26 @@ const sectionBox = css`
 const tweetBox = css`
   margin: 20px 0;
   padding: 12px;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center; */
   border: 1px solid #657786;
   border-radius: 4px;
   box-shadow: 4px 4px 6px #aaa;
   width: 30%;
-  height: 600px;
+  height: 700px;
 
   p {
     margin: 20px 0;
+    padding: 4px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 130px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+  }
+
+  a {
+    margin: 12px 0;
+    display: block;
+    text-align: center;
   }
 
   @media screen and (max-width: 1024px) {
@@ -98,12 +112,11 @@ const tweetBox = css`
 
   @media screen and (max-width: 768px) {
     width: 96%;
-    height: 500px;
+    height: auto;
   }
 `;
 
 const profileBox = css`
-  background-color: skyblue;
   display: flex;
   align-items: center;
   width: 100%;
@@ -115,4 +128,14 @@ const profileBox = css`
   h3 {
     margin-left: 12px;
   }
+`;
+
+const imgBox = css`
+  width: 100%;
+  text-align: center;
+`;
+
+const profileImgBox = css`
+  width: 80px;
+  min-width: 80px;
 `;
