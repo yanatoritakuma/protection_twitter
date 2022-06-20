@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main css={mainBox}>
-        <h1>Twitter_保護犬猫</h1>
+        <h1>#保護犬猫</h1>
         <TweetGet />
       </main>
     </div>
