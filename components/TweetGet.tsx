@@ -6,15 +6,17 @@ import noImage from "../public/images/noimage.png";
 import mapJapan from "../public/images/mapjapan.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { Button } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
 import { TMap } from "../types/typeMap";
 
 export const TweetGet = () => {
   const [tweets, setTweets] = useState<TTweets[]>([]);
-  console.log("tweets", tweets);
   const [place, setPlace] = useState("");
   const [placeNum, setPlaceNum] = useState("");
   const [japanMap, setJapanMap] = useState<TMap>();
-  console.log("japanMap", japanMap);
 
   useEffect(() => {
     if (japanMap !== undefined) {
@@ -204,6 +206,24 @@ export const TweetGet = () => {
         ))}
         <Image src={mapJapan} alt="日本地図" width={1000} height={700} />
       </div>
+      <div css={mapSpBox}>
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">都道府県</InputLabel>
+          <Select
+            value={place}
+            label="都道府県"
+            onChange={(e: SelectChangeEvent) =>
+              setPlace(e.target.value as string)
+            }
+          >
+            {japanMap?.data.result.map((v) => (
+              <MenuItem key={v.prefCode} value={v.prefName}>
+                {v.prefName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
       <div css={resetBox}>
         <Button variant="contained" onClick={() => setPlace("")}>
           都道府県リセット
@@ -336,12 +356,28 @@ const resetBox = css`
   text-align: center;
 `;
 
+const mapSpBox = css`
+  margin: 12px 0;
+  display: none;
+  text-align: center;
+  .MuiFormControl-root {
+    width: 170px;
+  }
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+
 const mapBox = css`
   margin: 0 auto;
   width: 650px;
   height: 600px;
   text-align: center;
   position: relative;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 
   .pref1 {
     display: block;
