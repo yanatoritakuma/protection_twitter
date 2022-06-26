@@ -47,6 +47,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         text: string;
         id_str: string;
         entities: string;
+        user: any;
       }[];
     }
   ).statuses;
@@ -55,6 +56,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     text: string;
     id_str: string;
     entities: string;
+    user: any;
   }[] = [];
 
   if (statuses) {
@@ -63,6 +65,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         text: tweet.text,
         id_str: tweet.id_str,
         entities: tweet.entities,
+        user: tweet.user,
       });
     });
   }
