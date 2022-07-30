@@ -698,9 +698,9 @@ const mapBox = css`
     position: absolute;
     z-index: 10;
     width: 29px;
-    height: 69px;
+    height: 34px;
     top: 262px;
-    left: 258px;
+    left: 227px;
   }
   .pref32 {
     display: block;
@@ -710,7 +710,7 @@ const mapBox = css`
     width: 28px;
     height: 34px;
     top: 262px;
-    left: 227px;
+    left: 195px;
   }
   .pref33 {
     display: block;
